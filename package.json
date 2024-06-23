@@ -1,0 +1,15 @@
+{
+  "name": "my-fullstack-project",
+  "version": "1.0.0",
+  "description": "Fullstact Project cerated by Rishabh Gupta with the help of chai or code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "author": "\"Rishabh Gupta\"",
+  "license": "ISC"
+}
