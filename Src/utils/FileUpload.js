@@ -24,4 +24,17 @@ import FileSystem from fs;
 
     }
 
+    // const VideoUpload = async (VideoUploadFile){
+    //     try{
+    //         if(!VideoUploadFile) return "Path is Invaild"
+    //         const response= await cloudinary.uploader.upload(VideoUploadFile,{
+    //         resource_type: "video",
+    //     })
+    //     }
+    //     catch(error){
+    //         fs.unlinksync(VideoUploadFile)
+    //         return "Video Deleted"
+    //     }
+    // }
+
 export {uploadonCloud}

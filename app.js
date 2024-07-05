@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 
-const app =express()
+const app = express()
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
@@ -16,5 +16,17 @@ app.use(express.urlencoded({extended:true, limit: "20kb"}))//URL file data take 
 app.use(express.static("Public"))// this take the images like fill//
 
 app.use(cookieParser())
+
+
+//Routes import
+
+import userRouter from "./src/routes/User.routes.js"
+
+//Routes declaration
+app.use('/api/user', userRouter) // this is the route for user
+
+
+//  http://localhost:port/api/r1/users/register
+
 
 export {app}

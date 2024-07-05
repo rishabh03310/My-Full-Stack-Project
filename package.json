@@ -2,10 +2,10 @@
   "name": "my-fullstack-project",
   "version": "1.0.0",
   "description": "Full stack Project cerated by Rishabh Gupta with the help of chai or code",
-  "main": "index.js",
+  "main": "E:/My FullStack Project/Src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --experimental-modules Src/index.js"
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
   },
   "keywords": [
     "javascript",
@@ -22,9 +22,10 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "dotnet": "^1.1.4",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.4.3",
+    "mongoose": "^8.4.4",
     "mongoose-aggregate-paginate-v2": "^1.1.0",
     "multer": "^1.4.5-lts.1",
     "prettier": "^3.3.2"
