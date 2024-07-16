@@ -1,11 +1,11 @@
-import { v2 } from 'cloudinary';
-import FileSystem from fs;
+import { v2 as cloudinary } from "cloudinary"
+import FileSystem from 'fs';
 
 
     cloudinary.config({ 
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
         api_key: process.env.CLOUDINARY_API_KEY, 
-        api_secret: CLOUDINARY_API_SECRET
+        api_secret: process.env.CLOUDINARY_API_SECRET
     });
 
     const uploadonCloud = async (FilePath)=>{
@@ -24,17 +24,5 @@ import FileSystem from fs;
 
     }
 
-    // const VideoUpload = async (VideoUploadFile){
-    //     try{
-    //         if(!VideoUploadFile) return "Path is Invaild"
-    //         const response= await cloudinary.uploader.upload(VideoUploadFile,{
-    //         resource_type: "video",
-    //     })
-    //     }
-    //     catch(error){
-    //         fs.unlinksync(VideoUploadFile)
-    //         return "Video Deleted"
-    //     }
-    // }
 
 export {uploadonCloud}

@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import { JsonWebTokenError } from "jsonwebtoken";
+// import { JsonWebTokenError } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const usershema = new Schema(
@@ -38,7 +38,7 @@ const usershema = new Schema(
         },
         password:{
             type:String,
-            required: [ture, "Password is required"]
+            required: [true, "Password is required"]
         },
         refreshToken:{
             type:String,

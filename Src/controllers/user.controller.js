@@ -7,7 +7,8 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 const registerUser = asyncHandler (async (req , res)=>{
     
     const {username,email,FullName, password} = req.body
-    console.log("email", email);
+    // console.log("email", email);
+    // console.log("username", username);
 
     if(
         [username,email,FullName, password].some((field)=>
@@ -16,7 +17,7 @@ const registerUser = asyncHandler (async (req , res)=>{
         throw new ApiError(400, "Field is empty")
     }
 
-    const existdUser = User.find({
+    const existdUser = await User.find({
         $or:[{username}, {email}]
     })
 
@@ -25,8 +26,11 @@ const registerUser = asyncHandler (async (req , res)=>{
     }
 
     const avatarlocalpath = req.files?.avatar[0]?.path;
-    const coverImagelocalpath = res.files?.coverImage[0]?.path;
-
+    let coverImageLocalPath;
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path
+    }
+    
     if(!avatarlocalpath){
         throw new ApiError(400, "Avatar is required")
     }

@@ -1,1 +1,1 @@
-export const DB = "video play"
+export const DB = "videoplay"
