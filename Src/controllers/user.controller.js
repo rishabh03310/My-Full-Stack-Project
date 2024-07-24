@@ -24,7 +24,6 @@ const generateAccessAndRefreshToken = async(userID)=>{
 }
 
 
-
 const registerUser = asyncHandler (async (req , res)=>{
     
     const {username,email,FullName, password} = req.body
@@ -58,14 +57,14 @@ const registerUser = asyncHandler (async (req , res)=>{
     }
 
     const avatar = await uploadonCloud (avatarlocalpath)
-    const coverImage= await uploadonCloud(coverImagelocalpath)
+    const coverImage= await uploadonCloud(coverImageLocalPath)
 
     if(!avatar){
         throw new ApiError(400, "Avatar is required");
     }
 
     const user = await User.create({
-        username: username.tolowercase(),
+        username: username,
         email,
         FullName,
         avatar: avatar.url,
@@ -86,11 +85,12 @@ const registerUser = asyncHandler (async (req , res)=>{
     )
 })
 
+
 const loginUser = asyncHandler (async(req, res)=>{
         
     const {email, username, password} = req.body
 
-    if(!username || !email){
+    if(!(username && email)){
         throw new ApiError(400, "Username or email is requied")
     }
 
