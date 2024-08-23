@@ -4,6 +4,7 @@ import {User} from "../models/user.model.js"
 import {uploadonCloud} from "../utils/FileUpload.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import { jwt } from "jsonwebtoken";
+import mongoose from "mongoose";
 
  
 const generateAccessAndRefreshToken = async(userID)=>{
@@ -382,6 +383,58 @@ const getUserChannelProfiel = asyncHandler(async(req, res)=>{
     )
 })
 
+const getWatchHistory = asyncHandler(async(req, res)=>{
+    const user = await req.user.aggregate([
+        {
+            $match:{
+                _id: new mongoose.Types.ObjectId(req.user._id)
+            }
+        },
+        {
+            $lookup:{ 
+                from: "watchHistory",
+                localField: "_id",
+                foreignField: "_id",
+                as: "watchHistory",
+
+                pipeline:[{
+                    $lookup:{
+                        from: "videos",
+                        localField: "videoId",
+                        foreignField: "_id",
+                        as: "video",
+                        pipeline: [
+                            {
+                                $project:{
+                                    FullName:1,
+                                    username:1,
+                                    avatar:1
+                                }
+                            },
+                            {
+                                $addFields:{
+                                    owner:{
+                                        $first: "$owner"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }]
+            }
+        }
+    ])
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, 
+        user[0].watchHistory, 
+        "User watch history Fetched successfully")
+    )
+
+})
+
 export {
     registerUser,
     loginUser,
@@ -392,5 +445,7 @@ export {
     updateUserAvatar,
     updateAccountDetails,
     updateUserCoverImg,
-    getUserChannelProfiel
+    getUserChannelProfiel,
+    getWatchHistory
+    
 }
