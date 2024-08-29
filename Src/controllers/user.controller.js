@@ -3,8 +3,8 @@ import {ApiError} from "../utils/appError.js"
 import {User} from "../models/user.model.js"
 import {uploadonCloud} from "../utils/FileUpload.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
-import { jwt } from "jsonwebtoken";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
  
 const generateAccessAndRefreshToken = async(userID)=>{
@@ -139,7 +139,7 @@ const logoutUser = asyncHandler(async(req, res)=>{
     User.findByIdAndUpdate(
         req.user._id,
         {$set: {
-            refreshToken: undefined
+            refreshToken: 1
             }
         },
         {
